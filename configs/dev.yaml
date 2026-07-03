@@ -1,0 +1,14 @@
+sources:
+
+  customer:
+
+    input_path: /Volumes/retail_catalog/input/customer_master_15000_rows.csv
+
+    bronze_path: /Volumes/retail_catalog/bronze/customer
+
+    silver_path: /Volumes/retail_catalog/silver/customer
+
+    business_key:
+      - customer_id
+
+    order_column: updated_date
