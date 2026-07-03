@@ -26,6 +26,8 @@ class SourceConfig:
 
     order_column: str
 
+    record_source: str
+
     load_timestamp_column: str = "load_timestamp"
 
     file_format: str = "csv"
@@ -33,3 +35,5 @@ class SourceConfig:
     output_format: str = "parquet"
 
     partition_columns: list[str] | None = None
+    
+    
