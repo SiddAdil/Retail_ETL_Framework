@@ -28,11 +28,15 @@ class SourceConfig:
 
     record_source: str
 
+    gold_path: str
+
     load_timestamp_column: str = "load_timestamp"
 
     file_format: str = "csv"
 
     output_format: str = "parquet"
+
+    write_mode: str = "overwrite"
 
     partition_columns: list[str] | None = None
     

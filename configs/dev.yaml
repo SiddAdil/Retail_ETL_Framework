@@ -1,3 +1,15 @@
+project:
+  name: Retail_ETL_Framework
+
+audit:
+  enabled: true
+  path: /Volumes/retail_catalog/audit/audit
+
+reject:
+  enabled: true
+  path: /Volumes/retail_catalog/reject/reject
+  
+
 sources:
 
   customer:
@@ -6,7 +18,9 @@ sources:
 
     bronze_path: /Volumes/retail_catalog/bronze/customer
 
-    silver_path: /Volumes/retail_catalog/silver/customer
+    silver_path: /Volumes/retail_catalog/silver/customer_vol
+
+    gold_path: /Volumes/retail_catalog/gold/customer360_vol
 
     business_key:
       - customer_id
@@ -14,6 +28,13 @@ sources:
     order_column: updated_date
 
     record_source: CRM
+
+    output_format: parquet
+
+    write_mode: overwrite
+
+    partition_columns:
+      - ingestion_date
 
   sales:
 
