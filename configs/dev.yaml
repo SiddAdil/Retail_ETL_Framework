@@ -12,3 +12,16 @@ sources:
       - customer_id
 
     order_column: updated_date
+
+  sales:
+
+    input_path: /Volumes/retail_catalog/input/sales_fact_15000_rows.csv
+
+    bronze_path: /Volumes/retail_catalog/bronze/sales
+
+    silver_path: /Volumes/retail_catalog/silver/sales
+
+    business_key:
+      - order_id
+
+    order_column: updated_date

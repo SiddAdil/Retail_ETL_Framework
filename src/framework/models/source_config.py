@@ -6,7 +6,6 @@ Stores metadata required to process a source dataset.
 """
 
 from dataclasses import dataclass
-from typing import List
 
 
 @dataclass
@@ -23,7 +22,7 @@ class SourceConfig:
 
     silver_path: str
 
-    business_key: List[str]
+    business_key: list[str]
 
     order_column: str
 
@@ -33,4 +32,4 @@ class SourceConfig:
 
     output_format: str = "parquet"
 
-    partition_columns: List[str] | None = None
+    partition_columns: list[str] | None = None
