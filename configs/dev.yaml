@@ -38,8 +38,58 @@ sources:
     partition_columns:
       - ingestion_date
 
+    trim_columns:
+      - customer_name
+      - city
+      - state
+      - country
+
+    partition_columns:
+      - ingestion_date
+
     standardize_columns:
       customer_name: name
+
+    regex_validations:
+      email:
+        column: email
+        pattern: '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
+
+      phone:
+        column: phone
+        pattern: '^[0-9]{10}$'
+
+  
+  product:
+
+  input_path: /Volumes/retail_catalog/input/product_master_15000_rows.csv
+
+  bronze_path: /Volumes/retail_catalog/bronze/product
+
+  silver_path: /Volumes/retail_catalog/silver/product
+
+  gold_path: /Volumes/retail_catalog/gold/product
+
+  business_key:
+    - product_id
+
+  order_column: updated_date
+
+  record_source: PRODUCT
+
+  file_format: csv
+
+  output_format: parquet
+
+  write_mode: overwrite
+
+  trim_columns:
+    - product_name
+    - category
+    - brand
+
+  partition_columns:
+    - ingestion_date
 
 
   sales:

@@ -58,14 +58,15 @@ class CleaningJob:
 
         # Future transformations will be added here
         #
-        # clean_df = self._trim_whitespace(clean_df)
-        clean_df = self._standardize_customer_name(
+        clean_df = self._apply_trim(
             clean_df, source_config)
+        clean_df = self._standardize_customer_name(clean_df)
         clean_df = self._standardize_email(clean_df)
-        # clean_df, email_reject_df = self._validate_email(clean_df)
+        clean_df, invalid_email_df  = self._validate_email(
+            clean_df, source_config)
         # clean_df, phone_reject_df = self._validate_phone(clean_df)
 
-        return clean_df, duplicate_df
+        return clean_df, duplicate_df, invalid_email_df
 
     def _validate_input(
         self,
@@ -163,14 +164,8 @@ class CleaningJob:
         df.withColumn(
             source_config.customer_name_column,
             initcap(
-                regexp_replace(
-                    trim(
                         col(source_config.customer_name_column)
-                    ),
-                    r"\s+",
-                    " "
-                )
-            )
+                    )
         )
     )
 
@@ -192,9 +187,32 @@ class CleaningJob:
         df.withColumn(
             "email",
             lower(
-                trim(
                     col("email")
-                )
+                
             )
         )
     )
+
+    def _apply_trim(
+
+        self,
+        df: DataFrame,
+        source_config: SourceConfig
+    ) -> DataFrame:
+    """
+    Trim leading and trailing whitespace from configured columns.
+    """
+
+    if not source_config.trim_columns:
+        return df
+
+    for column_name in source_config.trim_columns:
+
+        df = (
+            df.withColumn(
+                column_name,
+                trim(col(column_name))
+            )
+        )
+
+    return df

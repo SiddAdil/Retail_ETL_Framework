@@ -6,6 +6,7 @@ Stores metadata required to process a source dataset.
 """
 
 from dataclasses import dataclass
+from typing import List
 
 
 @dataclass(frozen=True)
@@ -22,7 +23,7 @@ class SourceConfig:
 
     silver_path: str
 
-    business_key: list[str]
+    business_key: List[str]
 
     order_column: str
 
@@ -40,6 +41,12 @@ class SourceConfig:
 
     customer_name_column: str = "customer_name"
 
-    partition_columns: list[str] | None = None
+    partition_columns: List[str] | None = None
+
+    trim_columns: List[str] | None = None
+
+    load_timestamp_column: str = "load_timestamp"
+
+    regex_validations: dict | None = None
     
     
