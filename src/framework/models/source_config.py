@@ -8,7 +8,7 @@ Stores metadata required to process a source dataset.
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(frozen=True)
 class SourceConfig:
     """
     Configuration for a source dataset.
@@ -37,6 +37,8 @@ class SourceConfig:
     output_format: str = "parquet"
 
     write_mode: str = "overwrite"
+
+    customer_name_column: str = "customer_name"
 
     partition_columns: list[str] | None = None
     

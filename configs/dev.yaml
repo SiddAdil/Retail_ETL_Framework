@@ -33,8 +33,14 @@ sources:
 
     write_mode: overwrite
 
+    customer_name_column: customer_name
+
     partition_columns:
       - ingestion_date
+
+    standardize_columns:
+      customer_name: name
+
 
   sales:
 
